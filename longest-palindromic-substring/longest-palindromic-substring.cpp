@@ -59,21 +59,15 @@ public:
         {
             if(s[i]==s[j])
             {
-                if(j-i==1) dp[i][j]=true;
-                else
+                if(j-i==1 || dp[i+1][j-1])
                 {
-                    if(dp[i+1][j-1]==true) dp[i][j]=true;
-                    else dp[i][j]=false;
+                    dp[i][j]=true;
+                    if(j-i+1>max_len)
+                    {
+                        max_len=j-i+1;
+                        ans=s.substr(i,j-i+1);
+                    }
                 }
-            }
-            else dp[i][j]=false;
-            if(dp[i][j])
-            {
-                if(j-i+1>max_len)
-                {
-                    max_len=j-i+1;
-                    ans=s.substr(i,j-i+1);
-                }    
             }
         }
     }
