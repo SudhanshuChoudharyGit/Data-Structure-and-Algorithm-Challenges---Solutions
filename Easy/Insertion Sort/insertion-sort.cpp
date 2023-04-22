@@ -22,11 +22,14 @@ class Solution
     void insertionSort(int arr[], int n)
     {
         //code here
+        //compare sorted and unsorted part of array and everytime with respect to the key element
+        //put the next element in place
+        
         for(int i=1;i<n;i++)
         {
             int key=arr[i];
             int j=i-1;
-            while(key<arr[j] && j>=0)
+            while(j>=0 && arr[j]>key)
             {
                 arr[j+1]=arr[j];
                 j--;
