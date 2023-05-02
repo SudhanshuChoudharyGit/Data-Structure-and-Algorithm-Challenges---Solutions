@@ -1,14 +1,20 @@
 class Solution {
 public:
     int maxArea(vector<int>& height) {
-            int water = 0;
-    int i = 0, j = height.size() - 1;
-    while (i < j) {
-        int h = min(height[i], height[j]);
-        water = max(water, (j - i) * h);
-        while (height[i] <= h && i < j) i++;
-        while (height[j] <= h && i < j) j--;
-    }
-    return water;
+        //start from the ends, as they have the most wide containers
+        //calculate again only if you find a height greater than initial effH
+        //otherwise keep moving from both sides
+        int i=0;
+        int j=height.size()-1;
+        int effH=0;
+        int ans=0;
+        while(i<j)
+        {
+            effH=min(height[i],height[j]);
+            ans=max(ans,effH*(j-i));
+            while(height[i]<=effH && i<j) i++;
+            while(height[j]<=effH && i<j) j--;
+        }
+        return ans;
     }
 };
