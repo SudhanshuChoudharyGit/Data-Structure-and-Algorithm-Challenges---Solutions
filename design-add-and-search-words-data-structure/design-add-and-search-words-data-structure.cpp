@@ -50,24 +50,7 @@ public:
     }
     
     bool search(string word) {
-        Node* temp=root;
-        for(int i=0;i<word.length();i++)
-        {
-            if(word[i]=='.')
-            {
-                for(int j=0;j<26;j++)
-                {
-                    if(temp->children[j] && addSearch(temp->children[j],word.substr(i+1))) return true;
-                }
-                return false;
-            }
-            else
-            {
-                if(temp->children[word[i]-'a']==NULL) return false;
-                temp=temp->children[word[i]-'a'];
-            }
-        }
-        return temp->isWord;
+        return addSearch(root,word);
     }
 };
 
