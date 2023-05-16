@@ -1,42 +1,32 @@
 class WordDictionary {
 public:
-    class Node {
-    public:
-        bool isWord;
-        Node* children[26];
-
-        Node(){
-            isWord=false;
-            for(int i=0;i<26;i++) children[i]=NULL;
-        }
-    };
-
-    Node* root;
+    bool isWord;
+    WordDictionary* children[26];
 
     WordDictionary() {
-        root= new Node();
+        isWord=false;
+        memset(children, 0, sizeof(children));
     }
     
     void addWord(string word) {
-        Node* temp=root;
+        WordDictionary* temp=this;
         for(char c : word)
         {
-            if(temp->children[c-'a']==NULL) temp->children[c-'a']=new Node();
+            if(temp->children[c-'a']==NULL) temp->children[c-'a']=new WordDictionary();
             temp=temp->children[c-'a'];
         }
         temp->isWord=true;
     }
 
-    bool addSearch(Node* node,string word)
-    {
-        Node* temp=node;
+    bool search(string word) {
+        WordDictionary* temp=this;
         for(int i=0;i<word.length();i++)
         {
             if(word[i]=='.')
             {
                 for(int j=0;j<26;j++)
                 {
-                    if(temp->children[j] && addSearch(temp->children[j],word.substr(i+1))) return true;
+                    if(temp->children[j] && temp->children[j]->search(word.substr(i+1))) return true;
                 }
                 return false;
             }
@@ -48,12 +38,7 @@ public:
         }
         return temp->isWord;
     }
-    
-    bool search(string word) {
-        return addSearch(root,word);
-    }
 };
-
 /**
  * Your WordDictionary object will be instantiated and called as such:
  * WordDictionary* obj = new WordDictionary();
