@@ -6,7 +6,7 @@ public:
         int l,r;
         l=0;
         r=n-1;
-        while(l<r)
+        while(l<=r)
         {
             int m=(r+l)/2;
             if(m>0 && nums[m]<nums[m-1]) return nums[m];
@@ -17,6 +17,6 @@ public:
             }
             else r=m-1;
         }
-        return nums[l];
+        return nums[0];
     }
 };
