@@ -12,6 +12,7 @@ bool backtrack(vector<int>& candidates, int target,int index,int sum,vector<int>
     {
         for(int i=index;i<candidates.size();i++)
         {
+            if(sum+candidates[i]>target) break;
             backtrack(candidates,target,i,sum,v,ans);
         }
     }
@@ -23,11 +24,12 @@ vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
     vector<vector<int>> ans;
     if(target==1) return ans;
     int n=candidates.size();
-    //sort(candidates.begin(),candidates.end());
+    sort(candidates.begin(),candidates.end());
     int sum=0;
     vector<int> v;
     for(int i=0;i<n;i++)
     {
+        if(candidates[i]>target) break;
         backtrack(candidates,target,i,sum,v,ans);
     }
     return ans;
