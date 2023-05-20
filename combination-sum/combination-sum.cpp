@@ -1,6 +1,69 @@
 class Solution {
 public:
 
+bool backtrack(vector<int>& candidates, int target,int index,int sum,vector<int>& v,vector<vector<int>>& ans) {
+    sum+=candidates[index];
+    v.push_back(candidates[index]);
+    if(sum==target)
+    {
+        ans.push_back(v);
+    }
+    else if(sum<target)
+    {
+        for(int i=index;i<candidates.size();i++)
+        {
+            backtrack(candidates,target,i,sum,v,ans);
+        }
+    }
+    v.pop_back();
+    return true;
+}
+
+vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+    vector<vector<int>> ans;
+    if(target==1) return ans;
+    int n=candidates.size();
+    //sort(candidates.begin(),candidates.end());
+    int sum=0;
+    vector<int> v;
+    for(int i=0;i<n;i++)
+    {
+        backtrack(candidates,target,i,sum,v,ans);
+    }
+    return ans;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
     void backtrack(vector<int>& candidates,int target,vector<vector<int>>& ans,vector<int>& curele,int sum,int index) {
         if(sum>target) return;
         if(sum==target)
@@ -25,4 +88,5 @@ public:
         backtrack(candidates,target,ans,curele,0,0);
         return ans;
     }
+*/
 };
