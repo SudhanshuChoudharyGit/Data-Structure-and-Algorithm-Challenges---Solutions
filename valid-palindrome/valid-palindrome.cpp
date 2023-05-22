@@ -25,9 +25,9 @@ public:
         int r=n-1;
         while(l<r)
         {
-            if(!isalnum(s[l])) l++;
-            else if(!isalnum(s[r])) r--;
-            else if(tolower(s[l])!=tolower(s[r])) return false;
+            while(l<r && !isalnum(s[l])) l++;
+            while(l<r && !isalnum(s[r])) r--;
+            if(tolower(s[l])!=tolower(s[r])) return false;
             else 
             {
                 l++;
