@@ -4,30 +4,22 @@ public:
 int lengthOfLongestSubstring(string s) {
     int n=s.length();
     if(n==0 || n==1) return n;
-    vector<int> freq(256,-1);
-    int i=0;
-    int j=0;
-    int maxlen=1;
-    int len=0;
-    while(j<n)
+    set<char> currchars;
+    int maxlen=0;
+    int left=0;
+    for(int right=0;right<n;right++)
     {
-        if(freq[s[j]]==-1)
+        while(currchars.count(s[right])!=0)
         {
-            freq[s[j]]=j;
-            len++;
+            currchars.erase(s[left]);
+            left++;
         }
-        else
-        {
-            int newi = freq[s[j]]+1;
-            for(int index=i;index<newi;index++) freq[s[index]]=-1;
-            i = newi;
-            freq[s[j]]=j;
-            len=j-i+1;
-        }
-        j++;
-        maxlen=max(maxlen,len);
+        currchars.insert(s[right]);
+        int currlen=currchars.size();
+        maxlen=max(maxlen,currlen);
     }
     return maxlen;
+
 }
 
 
