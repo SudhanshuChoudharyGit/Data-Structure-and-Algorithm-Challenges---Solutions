@@ -1,6 +1,74 @@
 class Solution {
 public:
 
+    string fun(string s,int l,int r) {
+        int n=s.length();
+        int maxlen=0;
+        string ans="";
+        while(l>=0 && r<n && s[l]==s[r])
+        {
+            if(r-l+1 > maxlen)
+            {
+                maxlen=r-l+1;
+                ans = s.substr(l,maxlen);
+            }
+            l--;
+            r++;
+        }
+        return ans;
+    }
+
+    string longestPalindrome(string s) {
+        //trying every point as the center point of possible palindrome
+        //expanding till true
+        //doing it for odd and even lengths both
+        int n=s.length();
+        int maxlen=0;
+        string ans="";
+        for(int i=0;i<n;i++)
+        {
+            string str1= fun(s,i,i);
+            string str2= fun(s,i,i+1);
+            int len = max(str1.length(),str2.length());
+            if(len > maxlen) 
+            {
+                maxlen=len;
+                ans = ((str1.length() > str2.length()) ? str1 : str2);
+            }
+        }
+        return ans;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //intuitive approach
     //time complexity = O(n^2) [worst case]
     /*string fun(string s, int l,int r,int n)
@@ -17,7 +85,7 @@ public:
 
     }*/
 
-    string longestPalindrome(string s) {
+    //string longestPalindrome(string s) {
         /*string ans=s.substr(0,1);
         int n=s.length();
         int max_len=1;
@@ -40,8 +108,10 @@ public:
         return ans;
     */
 
+
     //dynamic programming
     //dp[i][j]=true if i to j is a palindrome
+    /*
     int n=s.length();
     if(n==1) return s;
     string ans;
@@ -73,5 +143,5 @@ public:
     }
     return ans;
     }
+    */
 
-};
