@@ -1,33 +1,30 @@
 class Solution {
 public:
 
-    void fun(vector<int>& nums,unordered_set<int> s,vector<int> v,vector<vector<int>>& ans, int i,int n)
+    void fun(set<int> s,vector<int> v,vector<vector<int>>& ans,int n,int ele)
     {
-        for(int j=0;j<n;j++)
-        {
-            if(s.find(nums[j])!=s.end()) continue;
-            s.insert(nums[j]);
-            v.push_back(nums[j]);
+        s.erase(ele);
+        for(int x : s)
+        {   
+            v.push_back(x);
             if(v.size()==n) ans.push_back(v);
-            else fun(nums,s,v,ans,j,n);
-            s.erase(nums[j]);
-            v.pop_back();
+            else fun(s,v,ans,n,x);
+            v.pop_back(); 
         }
     }
 
     vector<vector<int>> permute(vector<int>& nums) {
         vector<vector<int>> ans;
         int n = nums.size();
-        for(int i=0;i<n;i++)
-        {
-            unordered_set<int> s;
-            vector<int> v;
-            s.insert(nums[i]);
-            v.push_back(nums[i]);
+        set<int> s;
+        for(int i=0;i<n;i++) s.insert(nums[i]);
+        vector<int> v;
+        for(int x : s)
+        {   
+            v.push_back(x);
             if(v.size()==n) ans.push_back(v);
-            else fun(nums,s,v,ans,i,n);
-            s.erase(nums[i]);
-            v.pop_back();
+            else fun(s,v,ans,n,x);
+            v.pop_back();   
         }
         return ans;
     }
