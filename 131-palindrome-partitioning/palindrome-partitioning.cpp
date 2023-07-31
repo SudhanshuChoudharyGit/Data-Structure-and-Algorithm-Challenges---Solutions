@@ -2,12 +2,15 @@ class Solution {
 public:
 
     bool isPalindrome(string sub) {
-        string rev="";
-        for(int i=sub.length()-1;i>=0;i--)
+        int l=0;
+        int r=sub.length()-1;
+        while(l<r)
         {
-            rev+=sub[i];
+            if(sub[l]!=sub[r]) return false;
+            l++;
+            r--;
         }
-        return rev==sub;
+        return true;
     }
 
     void backtrack(string& s,vector<vector<string>>& ans,vector<string>& entry,int i) {
