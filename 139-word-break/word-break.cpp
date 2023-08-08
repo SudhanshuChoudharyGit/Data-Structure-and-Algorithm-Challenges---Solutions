@@ -94,28 +94,52 @@ public:
 
 // Approach - backtrack with memoization but instead of building number we will be reducing numner as soon as prefix is found
 
-    bool backtrack(string s,vector<string>& wordDict,int start_index,vector<int>& memo) {
-        if(start_index == s.length()) return true;
-        if(memo[start_index]!=-1) return (memo[start_index]==1);
-        for(string word : wordDict)
+    // bool backtrack(string s,vector<string>& wordDict,int start_index,vector<int>& memo) {
+    //     if(start_index == s.length()) return true;
+    //     if(memo[start_index]!=-1) return (memo[start_index]==1);
+    //     for(string word : wordDict)
+    //     {
+    //         if(word==s.substr(start_index,word.length()))
+    //         {
+    //             if(backtrack(s,wordDict,start_index+word.length(),memo))
+    //             {
+    //                 memo[start_index]=1;
+    //                 return true;
+    //             }
+    //         }
+    //     }
+    //     memo[start_index]=0;
+    //     return false;
+    // }
+
+
+    // bool wordBreak(string s, vector<string>& wordDict) {
+    //     vector<int> memo(s.length(),-1);
+    //     return backtrack(s,wordDict,0,memo);
+    // }
+
+
+// Approach : dp derived from backtrack with memo
+
+    bool wordBreak(string s, vector<string>& wordDict) {
+        vector<bool> dp(s.length()+1,false);
+        dp[0]=true;
+        unordered_set<string> st(wordDict.begin(),wordDict.end());
+        for(int i=1;i<=s.length();i++)
         {
-            if(word==s.substr(start_index,word.length()))
+            for(int j=0;j<i;j++)
             {
-                if(backtrack(s,wordDict,start_index+word.length(),memo))
+                if(dp[j])
                 {
-                    memo[start_index]=1;
-                    return true;
+                    if(st.find(s.substr(j,i-j))!=st.end())
+                    {
+                        dp[i]=true;
+                        break;
+                    }
                 }
             }
         }
-        memo[start_index]=0;
-        return false;
-    }
-
-
-    bool wordBreak(string s, vector<string>& wordDict) {
-        vector<int> memo(s.length(),-1);
-        return backtrack(s,wordDict,0,memo);
+        return dp[s.length()];
     }
 
 };
