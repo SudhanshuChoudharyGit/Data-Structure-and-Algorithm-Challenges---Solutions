@@ -8,18 +8,9 @@ public:
             ans.push_back(entry);
             return;
         }
-        if(op>0)
-        {
-            entry+="(";
-            backtrack(ans,entry,op-1,cp);
-            entry=entry.substr(0,entry.length()-1);
-        }
-        if(cp>op)
-        {
-            entry+=")";
-            backtrack(ans,entry,op,cp-1);
-            entry=entry.substr(0,entry.length()-1);
-        }
+        if(op>0) backtrack(ans,entry+"(",op-1,cp);
+        if(cp>op) backtrack(ans,entry+")",op,cp-1);
+
     }
 
     vector<string> generateParenthesis(int n) {
