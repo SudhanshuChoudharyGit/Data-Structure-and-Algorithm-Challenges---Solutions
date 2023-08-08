@@ -59,7 +59,7 @@ public:
     // }
 
 
-    // Approach 3
+    // Approach 3 -Swapping
     //     void swapAndSelect(vector<int>& nums,vector<vector<int>>& ans,int index)
     // {
     //     if(index==nums.size())
@@ -82,25 +82,30 @@ public:
     //     return ans;
     // }
 
-    // Appraoch 4
+    // Appraoch 4- using used[i] to keep track of which of them are already used
 
-    void backtrack(vector<vector<int>>& ans,vector<int>& nums,int index) {
-        if(index == nums.size())
+    void backtrack(vector<vector<int>>& ans,vector<int>& nums,vector<int> entry,vector<bool>& used) {
+        if(entry.size() == nums.size())
         {
-            ans.push_back(nums);
+            ans.push_back(entry);
             return;
         }
-        for(int i=index;i<nums.size();i++)
+        for(int i=0;i<nums.size();i++)
         {
-            swap(nums[i],nums[index]);
-            backtrack(ans,nums,index+1);
-            swap(nums[i],nums[index]);
+            if(used[i]) continue;
+            entry.push_back(nums[i]);
+            used[i]=true;
+            backtrack(ans,nums,entry,used);
+            entry.pop_back();
+            used[i]=false;
         }
     }
 
     vector<vector<int>> permute(vector<int>& nums) {
         vector<vector<int>> ans;
-        backtrack(ans,nums,0);
+        vector<bool> used(nums.size(),false);
+        vector<int> entry;
+        backtrack(ans,nums,entry,used);
         return ans;
     }
 
