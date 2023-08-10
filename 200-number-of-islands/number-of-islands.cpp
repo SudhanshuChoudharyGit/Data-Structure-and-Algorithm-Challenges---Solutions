@@ -59,10 +59,10 @@ public:
     //     }
     // }
 
-    void bfs(vector<vector<char>>& grid,vector<vector<bool>>& vis,int i,int j) {
+    void bfs(vector<vector<char>>& grid,int i,int j) {
         queue<pair<int,int>> q;
         q.push({i,j});
-        vis[i][j]=true;
+        grid[i][j]='2';
         vector<vector<int>> coordinates={{-1,0},{0,-1},{0,1},{1,0}};
         while(!q.empty())
         {
@@ -73,10 +73,10 @@ public:
             {
                 int xn = x + coordinates[i][0];
                 int yn = y + coordinates[i][1];
-                if(xn>=0 && yn>=0 && xn<grid.size() && yn<grid[0].size() && !vis[xn][yn] && grid[xn][yn]=='1')
+                if(xn>=0 && yn>=0 && xn<grid.size() && yn<grid[0].size() && grid[xn][yn]=='1')
                 {
                     q.push({xn,yn});
-                    vis[xn][yn]=true;
+                    grid[xn][yn]='2';
                 }
             }
         }
@@ -85,15 +85,14 @@ public:
     int numIslands(vector<vector<char>>& grid) {
         int m=grid.size();
         int n=grid[0].size();
-        vector<vector<bool>> vis(m,vector<bool>(n,false));
         int ans=0;
         for(int i=0;i<m;i++)
         {
             for(int j=0;j<n;j++)
             {
-                if(grid[i][j]=='1' && !vis[i][j])
+                if(grid[i][j]=='1')
                 {
-                    bfs(grid,vis,i,j);
+                    bfs(grid,i,j);
                     ans++;
                 }
             }
