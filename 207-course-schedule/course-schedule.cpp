@@ -39,19 +39,19 @@ public:
 
     //Using DFS -detect cycle; if there- false, not there- true
 
-    bool dfs(vector<int> adj[], int node,vector<int>& vis) {
-        vis[node]=1;
+    bool isCycle(vector<int> adj[], int node,vector<int>& vis) {
+        vis[node]=1; //visiting
 
         for(auto x : adj[node])
         {
-            if(vis[x]==1) return false;
+            if(vis[x]==1) return true; //cycle present
             else if(vis[x]==0) 
             {
-                if(dfs(adj,x,vis)==false) return false;
+                if(isCycle(adj,x,vis)) return true;
             }
         }
         vis[node]=2;
-        return true;
+        return false;
     }
 
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
@@ -65,7 +65,7 @@ public:
         {
             if(vis[x]==0)
             {
-                if(dfs(adj,x,vis)==false) return false;
+                if(isCycle(adj,x,vis)) return false;
             }
         }
         return true;
