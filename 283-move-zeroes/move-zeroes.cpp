@@ -8,15 +8,12 @@ public:
             if(nums[r]!=0)
             {
 
+                int x = nums[l];
                 nums[l]=nums[r];
+                nums[r]=x;
                 l++;
             }
             r++;
-        }
-        while(l<nums.size())
-        {
-            nums[l]=0;
-            l++;
         }
     }
 };
