@@ -10,7 +10,6 @@ public:
 
                 nums[l]=nums[r];
                 l++;
-
             }
             r++;
         }
