@@ -1,26 +1,96 @@
 class Solution {
 public:
+    //sliding window
+    int lengthOfLongestSubstring(string s) {
+        int len = s.length();
+        if(!len) return 0;
+        int ans=0;
+        int l,r;
+        l=r=0;
+        vector<int> freq(256,0);
+        while(r<len)
+        {
+            freq[s[r]]++;
+            while(l<=r && freq[s[r]]>1)
+            {
+                freq[s[l]]--;
+                l++;
+            }
+            ans = max(ans,r-l+1);
+            r++;
+        }
+    return ans;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //sliding window / two pointers
-    int lengthOfLongestSubstring(string s) {
-        int len=0;
-        if(s.length()==0) return len;
-        int i=0;
-        int j=0;
-        vector<int> freq(256,0);
-        while(j<s.length())
-        {
-            freq[s[j]]++;
-            while(freq[s[j]]>1)
-            {
-                freq[s[i]]--;
-                i++;
-            }
-            len=max(len,j-i+1);
-            j++;
-        }
-        return len;
-    }
+    // int lengthOfLongestSubstring(string s) {
+    //     int len=0;
+    //     if(s.length()==0) return len;
+    //     int i=0;
+    //     int j=0;
+    //     vector<int> freq(256,0);
+    //     while(j<s.length())
+    //     {
+    //         freq[s[j]]++;
+    //         while(freq[s[j]]>1)
+    //         {
+    //             freq[s[i]]--;
+    //             i++;
+    //         }
+    //         len=max(len,j-i+1);
+    //         j++;
+    //     }
+    //     return len;
+    // }
 
 
 
