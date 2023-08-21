@@ -1,7 +1,13 @@
+bool cmp(pair<float,int> a,pair<float,int> b) {
+        return a.first > b.first;
+    }
+
 class Solution {
 public:
+
+
     vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
-        priority_queue<pair<float,int>,vector<pair<float,int>>,greater<>> pq;
+        priority_queue<pair<float,int>,vector<pair<float,int>>,decltype(&cmp)> pq{cmp};
         for(int i=0;i<points.size();i++)
         {
             vector<int> v = points[i];
