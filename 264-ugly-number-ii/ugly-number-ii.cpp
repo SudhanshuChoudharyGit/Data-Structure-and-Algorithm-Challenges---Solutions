@@ -15,27 +15,27 @@ public:
         unordered_set<long> used;
         pq.push(1);
         used.insert(1);
-        long x=1;
+        n--;
         while(n--)
         {
-            x = pq.top();
+            int x = pq.top();
             pq.pop();
-            if(used.count(x*2)==0)
+            if(used.count(x*2l)==0)
             {
-                pq.push(x*2);
-                used.insert(x*2);
+                pq.push(x*2l);
+                used.insert(x*2l);
             } 
-            if(used.count(x*3)==0)
+            if(used.count(x*3l)==0)
             {
-                pq.push(x*3);
-                used.insert(x*3);
+                pq.push(x*3l);
+                used.insert(x*3l);
             } 
-            if(used.count(x*5)==0)
+            if(used.count(x*5l)==0)
             {
-                pq.push(x*5);
-                used.insert(x*5);
+                pq.push(x*5l);
+                used.insert(x*5l);
             } 
         }
-        return x;
+        return pq.top();
     }
 };
