@@ -1,25 +1,66 @@
 class Solution {
 public:
 
+    // int kthSmallest(vector<vector<int>>& matrix, int k) {
+    //     priority_queue<vector<int>,vector<vector<int>>,greater<>> pq;
+    //     for(int i=0;i<matrix.size();i++)
+    //     {
+    //         pq.push({matrix[i][0],i,0});
+    //     }
+    //     k--;
+    //     while(k--)
+    //     {
+    //         vector<int> v= pq.top();
+    //         pq.pop();
+    //         int val= v[0];
+    //         int listInd = v[1];
+    //         int ind = v[2];
+    //         if(ind<matrix[listInd].size()-1)
+    //         pq.push({matrix[listInd][ind+1],listInd,ind+1});
+    //     }
+    //     vector<int> v= pq.top();
+    //     return v[0];
+    // }
+
+
+    int getCount(vector<int> v,int target) {
+        int l=0;
+        int r=v.size()-1;
+        int count=0;
+        while(l<=r)
+        {
+            int m = l + (r-l)/2;
+            if(v[m]<target)
+            {
+                count= m+1;
+                l = m+1;
+            }
+            else r=m-1;
+        }
+        return count;
+    }
+
     int kthSmallest(vector<vector<int>>& matrix, int k) {
-        priority_queue<vector<int>,vector<vector<int>>,greater<>> pq;
-        for(int i=0;i<matrix.size();i++)
+        int n = matrix.size();
+        int l= matrix[0][0];
+        int r= matrix[n-1][n-1];
+        int ans=0;
+        while(l<=r)
         {
-            pq.push({matrix[i][0],i,0});
+            int m = l+ (r-l)/2;
+            int count=0;
+            for(vector v : matrix)
+            {
+                count+=getCount(v,m);
+            }
+            if(count<k)
+            {
+                ans=m;
+                l=m+1;
+            }
+            else r=m-1;
         }
-        k--;
-        while(k--)
-        {
-            vector<int> v= pq.top();
-            pq.pop();
-            int val= v[0];
-            int listInd = v[1];
-            int ind = v[2];
-            if(ind<matrix[listInd].size()-1)
-            pq.push({matrix[listInd][ind+1],listInd,ind+1});
-        }
-        vector<int> v= pq.top();
-        return v[0];
+        return ans;
     }
 
 
