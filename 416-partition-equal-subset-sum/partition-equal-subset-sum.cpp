@@ -1,6 +1,35 @@
 class Solution {
 public:
 
+    //bottom up space optimized, size = target+1
+    //because the check requires equal to sum or less than sum (sum-num) so
+    //reversing the sum loop can give answer
+    bool canPartition(vector<int>& nums) {
+        int totalsum=0;
+
+        for(auto num : nums) totalsum+=num;
+
+        if(totalsum%2!=0) return false;
+
+        int targetNum = totalsum/2;
+
+        vector<bool> dp(targetNum+1,false);
+
+        dp[0]=true;
+
+        for(auto num : nums)
+        {
+            for(int target=targetNum;target>=num;target--)
+            {
+                dp[target]=dp[target] || dp[target-num];
+            }
+        }
+
+        return dp[targetNum];
+    }
+
+/*
+    //bottom up dp size= target*2
     bool canPartition(vector<int>& nums) {
         int totalsum=0;
 
@@ -34,7 +63,7 @@ public:
     }
 
 
-
+*/
 
 
 
