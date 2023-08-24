@@ -1,6 +1,33 @@
 class Solution {
 public:
 
+    int coinChange(vector<int>& coins, int amount) {
+        sort(coins.begin(),coins.end());
+        vector<long> dp(amount+1,(long)INT_MAX+1); 
+        dp[0]=0;
+        for(long sum=1;sum<=amount;sum++)
+        {
+            for(auto coin : coins)
+            {
+                if(coin>sum) break;
+
+                if(dp[sum-coin]!=(long)INT_MAX+1)
+                {
+                    dp[sum] = min(dp[sum],dp[sum-coin]+1);
+                }
+
+            }
+        }
+        return (dp[amount]==(long)INT_MAX+1)?-1:(int)dp[amount];
+    }
+
+
+
+
+
+
+/*
+    //backtrack with memo - Top Down
     long backtrack(vector<int>& coins,long amount,long sum,vector<long>& memo)
     {
         if(memo[sum]!=-1) return memo[sum];
@@ -22,7 +49,7 @@ public:
         return (ans==INT_MAX) ? -1 : (int)ans;
     }
 
-
+*/
 
 
 
