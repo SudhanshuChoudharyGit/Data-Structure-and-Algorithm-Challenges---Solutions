@@ -15,47 +15,40 @@ void printArray(int arr[], int size)
 // } Driver Code Ends
 class Solution
 {
+    
     public:
     
-    void swap(int& a,int& b)
-    {
-        int c;
-        c=a;
-        a=b;
-        b=c;
-    }
     //Function to sort an array using quick sort algorithm.
     void quickSort(int arr[], int low, int high)
     {
-        // code here
-        if(low<high)
-        {
-            int pivot=partition(arr,low,high);
-            quickSort(arr,low,pivot-1);
-            quickSort(arr,pivot+1,high);
-        }
+        if(low>=high) return;
+        int pivot = partition(arr,low,high);
+        quickSort(arr,low,pivot-1);
+        quickSort(arr,pivot+1,high);
     }
     
     public:
     int partition (int arr[], int low, int high)
     {
        // Your code here
-       int pivot=arr[high];
+       int pivot=high;
        int i=low-1;
-       
-       for(int j=low;j<high;j++)
+       for(int ind=low;ind<high;ind++)
        {
-           if(arr[j]<=pivot)
+           if(arr[ind]<arr[pivot])
            {
                i++;
-               swap(arr[j],arr[i]);
+               int temp=arr[ind];
+               arr[ind]=arr[i];
+               arr[i]=temp;
            }
        }
-       swap(arr[i+1],arr[high]);
-       return i+1;
+       i++;
+       int temp=arr[i];
+       arr[i]=arr[pivot];
+       arr[pivot]=temp;
+       return i;
     }
-    
-    
 };
 
 
