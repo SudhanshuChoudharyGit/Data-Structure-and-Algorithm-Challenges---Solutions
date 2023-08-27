@@ -28,20 +28,9 @@ class Solution {
             }
             ptr=ptr.next;
         }
-        while(head!=null)
-        {
-            ptr.next=head;
-            head=head.next;
-            ptr=ptr.next;
-        }
-        while(mid!=null)
-        {
-            ptr.next=mid;
-            mid=mid.next;
-            ptr=ptr.next;
-        }
-        temp=temp.next;
-        return temp;
+        if(head!=null) ptr.next=head;
+        if(mid!=null) ptr.next=mid;
+        return temp.next;
     }
 
     public ListNode sortList(ListNode head) {
@@ -57,7 +46,6 @@ class Solution {
         slow.next=null;
         head = sortList(head);
         mid = sortList(mid);
-        head = merge(head,mid);
-        return head;
+        return merge(head,mid);
     }
 }
