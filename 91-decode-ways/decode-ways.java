@@ -1,48 +1,31 @@
 class Solution {
+
+    public int backtrack(String s, int index,int[] memo) {
+        if(memo[index]!=-1) return memo[index];
+        if(index == s.length())
+        {
+            memo[index] = 1;
+            return 1;
+        }
+        int poss = 0;
+        String num = ""+s.charAt(index);
+        if(Integer.parseInt(num)>0) poss += backtrack(s,index+1,memo);
+        if(index<s.length()-1)
+        {
+            num += s.charAt(index+1);
+            if(Integer.parseInt(num)>9 && Integer.parseInt(num)<=26)
+            poss += backtrack(s,index+2,memo);
+        }
+        memo[index] = poss;
+        return poss;
+    }
+
     public int numDecodings(String s) {
-        //backtracking
-        // 226
-        // 2 -> 26 
-        // 22 -> 6
-        // ---
-        // 26
-        // 2 -> 6
-        // 26 -> ""
-
-        // 206
-        // 2 -> 06 (return)
-        // 20 -> 6 -> "" -> count++
-        // -1
-
-        // 2
-        // 2 -> ""
-        // if(i<n-1)
-
-        // 12
-        // 1 -> 2 -> "" -> count++;
-        // 12 -> "" -> count ++;
-        // -2
-
-        // --------
-        //dynamic prgramming
-        //226
-
-        // [1,1,2,3]
-        // dp[0] = 1
-        // i (if possible)-> dp[i-1]
-        // i + i-1 (if possible)-> dp[i-2]
-        // dp[i] = dp[i-1] + dp[i-2]
-
-        // 2006
-        // [1,1,1,0,0]
-
-        // 206
-        // [1,1,1,1]
-
-        // dp -> []
-        // state
-        // dp[i] = number of ways to decode string of length 0 to i
-
+        int[] memo = new int[s.length()+1];
+        Arrays.fill(memo,-1);
+        return backtrack(s,0,memo);
+        //dynamic programming
+        /*
         char[] ch = s.toCharArray();
         int n = ch.length;
         int[] dp = new int[n+1];
@@ -57,5 +40,6 @@ class Solution {
             if(Integer.parseInt(num)>9 && Integer.parseInt(num)<=26) dp[i]+=dp[i-2];
         }
         return dp[n];
+        */
     }
 }
