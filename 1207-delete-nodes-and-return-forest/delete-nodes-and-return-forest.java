@@ -15,6 +15,54 @@
  */
 class Solution {
 
+    public TreeNode fun(TreeNode root,List<TreeNode> ans,Set<Integer> deleteIt)
+    {
+        if(root==null) return root;
+        if(deleteIt.contains(root.val))
+        {
+            if(fun(root.left,ans,deleteIt)!=null) ans.add(root.left);
+            if(fun(root.right,ans,deleteIt)!=null) ans.add(root.right);
+            return null;
+        }
+        root.left = fun(root.left,ans,deleteIt);
+        root.right = fun(root.right,ans,deleteIt);
+        return root;
+    }
+
+    public List<TreeNode> delNodes(TreeNode root, int[] to_delete) {
+        Set<Integer> deleteIt = new HashSet<>();
+        for(int x : to_delete) deleteIt.add(x);
+        List<TreeNode> ans = new ArrayList<>();
+        if(fun(root,ans,deleteIt)!=null) ans.add(root);
+        return ans;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
     public void dfs(TreeNode root,HashMap<TreeNode,Integer> map)
     {
         if(root==null) return;
@@ -57,4 +105,5 @@ class Solution {
         return ans;
 
     }
+    */
 }
