@@ -41,45 +41,26 @@ class GFG
 
 //User function Template for Java
 
-
-
 class Solution
 {
-    
-    /*class Pair{
-        int start;
-        int end;
-        
-        public Pair(int start,int end){
-            this.start = start;
-            this.end = end;
-        }
-    
-    }*/
-
     //Function to find the minimum number of platforms required at the
     //railway station such that no train waits.
     static int findPlatform(int arr[], int dep[], int n)
     {
         // add your code here
+        int ans = Integer.MIN_VALUE;
         int[] time = new int[2402];
         for(int i=0;i<n;i++)
         {
-            time[arr[i]]++;
-            time[dep[i]+1]--;
+            time[arr[i]]+=1;
+            time[dep[i]+1]-=1;
         }
-        
-        int stations = 0;
-        
-        for(int i=1;i<=2401;i++)
+        for(int i=1;i<2402;i++)
         {
             time[i]+=time[i-1];
-            stations = Math.max(stations,time[i]);
+            ans = Math.max(ans,time[i]);
         }
-        
-        return stations;
-        
-        
+        return ans;
     }
     
 }
