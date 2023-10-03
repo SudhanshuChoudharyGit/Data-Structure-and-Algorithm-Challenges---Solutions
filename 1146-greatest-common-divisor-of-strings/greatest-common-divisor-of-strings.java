@@ -1,5 +1,18 @@
 class Solution {
 
+    //mathematical
+    public int gcd(int x,int y){
+        if(y==0) return x;
+        return gcd(y,x%y);
+    }
+
+    public String gcdOfStrings(String str1, String str2) {
+        if(!(str1+str2).equals(str2+str1)) return "";
+        return str1.substring(0,gcd(str1.length(),str2.length()));
+    }
+
+    //brute force
+    /*
     public boolean isDivisor(String str,String s)
     {
         int lenbase = str.length();
@@ -25,4 +38,5 @@ class Solution {
         }
         return "";
     }
+    */
 }
