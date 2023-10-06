@@ -1,6 +1,19 @@
 class Solution {
 
+    //diving into feasible 3s
+    public int integerBreak(int n) {
+        if(n<=3) return n-1;
+
+        if(n%3==0) return (int)Math.pow(3,n/3);
+
+        if(n%3==2) return (int)Math.pow(3,n/3)*2;
+
+        return (int)Math.pow(3,n/3-1)*4;
+    }
+
+
     //maths
+    /*
     public int integerBreak(int n) {
         if(n<=3) return n-1;
         int ans = 1;
@@ -12,6 +25,7 @@ class Solution {
 
         return ans*n;
     }
+    */
 
     //dp
     /*
