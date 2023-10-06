@@ -1,5 +1,20 @@
 class Solution {
 
+    //maths
+    public int integerBreak(int n) {
+        if(n<=3) return n-1;
+        int ans = 1;
+        while(n>4)
+        {
+            ans*=3;
+            n -= 3;
+        }
+
+        return ans*n;
+    }
+
+    //dp
+    /*
     public int integerBreak(int n) {
         int[] dp = new int[n+1];
         dp[1] = 1;
@@ -12,4 +27,5 @@ class Solution {
         }
         return dp[n];
     }
+    */
 }
