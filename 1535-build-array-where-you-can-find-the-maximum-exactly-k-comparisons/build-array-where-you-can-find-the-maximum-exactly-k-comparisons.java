@@ -1,6 +1,35 @@
 class Solution {
     int MOD  = (int)Math.pow(10,9)+7;
 
+    //bottom up - DP
+    public int numOfArrays(int n, int m, int k) {
+        int[][][] dp = new int[n+1][m+1][k+1];
+        for(int i = 1;i<=m;i++) dp[n][i][0] = 1;
+
+        for(int a=n-1;a>=0;a--)
+        {
+            for(int b=m;b>=0;b--)
+            {
+                for(int c=0;c<=k;c++)
+                {
+                    for(int ind = 1;ind<=b;ind++)
+                    {
+                        dp[a][b][c] = (dp[a][b][c] + dp[a+1][b][c])%MOD;
+                    }
+                    if(c>0){for(int ind = b+1; ind<=m;ind++)
+                    {
+                        dp[a][b][c] = (dp[a][b][c] + dp[a+1][ind][c-1])%MOD;
+                    }}
+                }
+            }
+        }
+
+        return dp[0][0][k]; 
+    }
+
+
+    //recursion with memoizartion : top-down
+    /*
     public int poss(int ind, int maxSoFar, int remain,int n,int m,int[][][] memo){
         //have put too many maximums
         if(remain<0) return 0;
@@ -43,4 +72,5 @@ class Solution {
         }
         return poss(ind,maxSoFar,remain,n,m,memo);
     }
+    */
 }
