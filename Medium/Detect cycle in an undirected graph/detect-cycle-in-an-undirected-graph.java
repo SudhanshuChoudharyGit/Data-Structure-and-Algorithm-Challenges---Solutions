@@ -43,6 +43,9 @@ class Pair{
 
 class Solution {
     
+    
+    //BFS
+    /*
     public boolean detect(ArrayList<ArrayList<Integer>> adj, boolean[] vis, int x) {
         Deque<Pair> dq = new ArrayDeque<>();
         dq.addLast(new Pair(x,-1));
@@ -65,6 +68,23 @@ class Solution {
             }
         }
         return false;
+    }*/
+    
+    
+    public boolean detect(ArrayList<ArrayList<Integer>> adj, boolean[] vis, int x,int parent) {
+        vis[x] = true;
+        for(int neighbour : adj.get(x))
+        {
+            if(vis[neighbour]==false)
+            {
+                if(detect(adj,vis,neighbour,x)) return true;
+            }
+            else
+            {
+                if(neighbour!=parent) return true;
+            }
+        }
+        return false;
     }
     
     // Function to detect cycle in an undirected graph.
@@ -75,7 +95,7 @@ class Solution {
         {
             if(!vis[i])
             {
-                if(detect(adj,vis,i)) return true;
+                if(detect(adj,vis,i,-1)) return true;
             }
         }
         return false;
