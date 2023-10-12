@@ -38,37 +38,20 @@ class Solution
     {
         //hashmap of letters -> freq;
         int[] freq = new int[26];
+        Deque<Character> dq = new ArrayDeque<>();
+        char ans = '$';
         for(char c : S.toCharArray())
         {
             freq[c-'a']++;
+            if(freq[c-'a']==1) dq.addLast(c);
+            while(dq.size()>0 && freq[dq.getFirst()-'a']!=1)
+            {
+                dq.removeFirst();
+            }
+            if(dq.size()==0) ans='$';
+            else ans = dq.getFirst();
         }
-        for(char c : S.toCharArray())
-        {
-            if(freq[c-'a']==1) return c;
-        }
-        return '$';
-        
-        
-        
-        
-        
-        
-        /*
-        HashMap<Character,Integer> freq = new HashMap<>();
-        char[] ch = S.toCharArray();
-        
-        for(char c : ch)
-        {
-            if(freq.containsKey(c)) freq.put(c,freq.get(c)+1);
-            else freq.put(c,1);
-        }
-        
-        for( char c : ch)
-        {
-            if(freq.get(c)==1) return c;
-        }
-        
-        return '$';*/
+        return ans;
     }
 }
 
