@@ -13,6 +13,7 @@ class Solution {
                 for(int num = 1;num<=k;num++)
                 {
                     if(j>=num) dp[i][j] = (dp[i][j]%MOD + dp[i-1][j-num]%MOD)%MOD;
+                    else break;
                 }
             }
         }
