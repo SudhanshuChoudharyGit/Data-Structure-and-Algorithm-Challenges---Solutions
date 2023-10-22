@@ -1,5 +1,60 @@
 class Solution {
 
+    public int numDecodings(String s) {
+        /*
+        CHOICES:
+        -> SINGLE DIGIT : 
+            -> 1 - 9 = 1 choice
+            -> 0 no choice
+
+            choice at index += choice at index - 1
+        -> DOUBLE DIGIT (if possible):
+            -> 10 - 26 = 1 choice
+            -> else = no choice
+
+            choice at index += choice at index - 2
+        */
+
+        int n = s.length();
+        int[] dp = new int[n+1];
+        //"" -> empty (1 way to decode)
+        dp[0] = 1;
+        if(s.charAt(0)=='0') return 0;
+        dp[1] = 1;
+        for(int i=2;i<=n;i++)
+        {
+            int singleDigit = Integer.valueOf(s.substring(i-1,i));
+            if(singleDigit>=1) dp[i] += dp[i-1];
+            int doubleDigit = Integer.valueOf(s.substring(i-2,i));
+            if(doubleDigit>=10 && doubleDigit<=26) dp[i] += dp[i-2];
+        }
+        return dp[n];
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
     public int backtrack(String s, int index,int[] memo) {
         if(memo[index]!=-1) return memo[index];
         if(index == s.length())
@@ -40,6 +95,7 @@ class Solution {
             if(Integer.parseInt(num)>9 && Integer.parseInt(num)<=26) dp[i]+=dp[i-2];
         }
         return dp[n];
-        */
+        
     }
+*/
 }
