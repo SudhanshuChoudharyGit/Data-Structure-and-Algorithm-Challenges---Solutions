@@ -1,5 +1,6 @@
 class Solution {
 
+    /*
     public String helper(String s, int l,int r)
     {
         while(l>=0 && r<s.length() && s.charAt(l)==s.charAt(r))
@@ -21,15 +22,33 @@ class Solution {
         }
         return ans;
     }
+    */
 
 
-
-
-
-
-
-
-
+    public String longestPalindrome(String s) {
+        int n = s.length();
+        boolean[][] dp = new boolean[n][n];
+        for(int i=0;i<n;i++) dp[i][i]=true;
+        String ans = "";
+        ans+= s.charAt(0);
+        for(int len=2;len<=n;len++)
+        {
+            for(int i=0;i<n-len+1;i++)
+            {
+                int j = i+len-1;
+                if(len==2)
+                {
+                    if(s.charAt(i)==s.charAt(j)) dp[i][j] = true;
+                }
+                else
+                {
+                    if(s.charAt(i)==s.charAt(j) && dp[i+1][j-1]==true) dp[i][j] = true;
+                }
+                if(dp[i][j]==true && len>ans.length()) ans = s.substring(i,j+1);
+            }
+        }
+        return ans;
+    }
 
 
 
