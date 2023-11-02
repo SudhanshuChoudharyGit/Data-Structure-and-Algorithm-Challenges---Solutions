@@ -1,4 +1,24 @@
 class Solution {
+
+    //O(1) space dp
+    public long getDescentPeriods(int[] prices) {
+        int n = prices.length;
+        long prev = 1;
+        long ans = 1;
+        for(int i=1;i<n;i++)
+        {
+            long curr = 1;
+            if(prices[i]==prices[i-1]-1) curr += prev;
+            prev= curr;
+            ans += curr;
+        }
+        return ans;
+    }
+
+
+
+    //sum solution
+    /*
     public long getDescentPeriods(int[] prices) {
         int n = prices.length;
         long currLen = 1;
@@ -14,4 +34,5 @@ class Solution {
         }
         return sum;
     }
+    */
 }
