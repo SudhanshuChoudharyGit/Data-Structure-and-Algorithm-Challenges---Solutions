@@ -12,26 +12,21 @@ class Solution {
     public int pairSum(ListNode head) {
         ListNode slow = head;
         ListNode fast = head.next;
-        while(fast.next!=null)
-        {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
         Stack<Integer> twinVal = new Stack<>();
-        slow = slow.next;
-        while(slow!=null)
+        while(fast!=null)
         {
             twinVal.push(slow.val);
             slow = slow.next;
+            if(fast.next!=null) fast = fast.next.next;
+            else fast = fast.next;
         }
         int maxSum = 0;
-        ListNode temp = head;
-        while(!twinVal.isEmpty())
+        while(slow!=null)
         {
             int twin = twinVal.peek();
-            maxSum = Math.max(maxSum,temp.val+twin);
+            maxSum = Math.max(maxSum,slow.val+twin);
             twinVal.pop();
-            temp = temp.next;
+            slow = slow.next;
         }
         return maxSum;
     }
