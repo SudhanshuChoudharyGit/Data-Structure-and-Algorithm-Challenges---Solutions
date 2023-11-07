@@ -5,6 +5,8 @@ class Solution {
         int totalSum = 0;
         for(int ele : nums) totalSum+= ele;
         int target = totalSum - x;
+        if(target<0) return -1;
+        if(target==0) return n;
         int l = 0;
         int r = 0;
         int currSum = 0;
