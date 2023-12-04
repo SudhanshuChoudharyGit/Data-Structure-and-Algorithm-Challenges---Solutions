@@ -1,25 +1,22 @@
 class Solution {
     public String convert(String s, int numRows) {
-        char[] charArray = s.toCharArray();
-        int len = charArray.length;
+        int len = s.length();
 
-        StringBuffer[] sbArray = new StringBuffer[numRows];
-        for(int i=0;i<numRows;i++) sbArray[i] = new StringBuffer();
+        StringBuffer[] sbrArray = new StringBuffer[numRows];
+        for(int i=0;i<numRows;i++) sbrArray[i] = new StringBuffer();
 
         int i = 0;
         while(i<len)
         {
-            //vertically down
-            for(int ind = 0; ind<numRows && i<len ; ind++) 
-            sbArray[ind].append(charArray[i++]);
-            //obliquely up
-            for(int ind = numRows-2; ind>=1 && i<len ; ind--)
-            sbArray[ind].append(charArray[i++]);
+            for(int ind=0;ind<numRows && i<len;ind++)
+            sbrArray[ind].append(s.charAt(i++));
+            for(int ind=numRows-2;ind>=1 && i<len;ind--)
+            sbrArray[ind].append(s.charAt(i++));
         }
 
         StringBuffer ans = new StringBuffer();
-        for(StringBuffer currsb : sbArray) ans.append(currsb);
-        return ans.toString();
+        for(StringBuffer curr : sbrArray) ans.append(curr);
 
+        return ans.toString();
     }
 }
