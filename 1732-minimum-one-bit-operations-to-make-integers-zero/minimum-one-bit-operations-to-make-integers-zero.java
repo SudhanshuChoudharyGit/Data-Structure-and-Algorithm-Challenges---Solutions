@@ -1,25 +1,32 @@
 class Solution {
     public int minimumOneBitOperations(int n) {
-        int[] bits = new int[31];
+        //setbit check
+        // (1<<i)&n
+        // f(x)
+
+
+        int[] bits = new int[32]; //bits -> f(x) = 2*f(x-1) + 1;
         bits[0] = 1;
 
-        for(int i=1;i<31;i++)
+        for(int i=1;i<32;i++)
         {
             bits[i] = 2*bits[i-1] + 1;
         }
 
-        int ans = 0;
         int count = 0;
-        for(int i=30;i>=0;i--)
+        int flag = 0;
+        for(int i=31;i>=0;i--)
         {
-            if(((1<<i)&n)!=0)
+            if(((1<<i)&n )!=0)
             {
-                count++;
-                if(count%2==0) ans-=bits[i];
-                else ans+=bits[i];
+                flag++;
+                if(flag%2!=0)
+                {
+                    count+=bits[i];
+                }
+                else count-=bits[i];
             }
         }
-
-        return ans;
+        return count;
     }
 }
