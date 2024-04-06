@@ -9,12 +9,12 @@ class Solution {
                 else invalids.push(i);
             }
         }
-        String ans = "";
+        StringBuilder ans = new StringBuilder();
         for(int i=s.length()-1;i>=0;i--)
         {
             if(!invalids.empty() && invalids.peek()==i) invalids.pop();
-            else ans = s.charAt(i)+ans;
+            else ans.append(s.charAt(i));
         }
-        return ans;
+        return ans.reverse().toString();
     }
 }
